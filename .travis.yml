@@ -1,0 +1,15 @@
+language: scala
+scala:
+   - 2.10.6
+   - 2.11.8
+   - 2.12.1
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+  - $HOME/.ivy2
+  - $HOME/.sbt
+
+script: "sbt clean coverage test"
+after_success: "sbt coverageReport coveralls"
