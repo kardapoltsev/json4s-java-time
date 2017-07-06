@@ -26,8 +26,13 @@ class JavaTimeSerializersSpec extends WordSpec with Matchers {
   implicit val formats = DefaultFormats ++ JavaTimeSerializers.defaults
 
   private val sample = ZonedDateTime.of(
-    2017, 1, 31,
-    19, 1, 50, 3,
+    2017,
+    1,
+    31,
+    19,
+    1,
+    50,
+    3,
     ZoneId.of("Asia/Yekaterinburg")
   )
 

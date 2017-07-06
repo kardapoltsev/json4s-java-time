@@ -1,6 +1,6 @@
 val Organization = "com.github.kardapoltsev"
-val SkipUpdate = true
-val CacheUpdate = true
+val SkipUpdate   = true
+val CacheUpdate  = true
 
 organization := Organization
 name := "json4s-java-time"
@@ -84,10 +84,9 @@ headers := Map(
   "scala" -> (HeaderPattern.cStyleBlockComment, ScalaHeader)
 )
 
-val json4sCore = "org.json4s" %% "json4s-core" % "3.5.1" % "provided"
-val scalatest = "org.scalatest" %% "scalatest" % "3.0.1" % "test"
-val json4sNative = "org.json4s" %% "json4s-native" % "3.5.1" % "test"
-
+val json4sCore   = "org.json4s"    %% "json4s-core"   % "3.5.1" % "provided"
+val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.1" % "test"
+val json4sNative = "org.json4s"    %% "json4s-native" % "3.5.1" % "test"
 
 scalacOptions in (Compile, doc) := Seq(
   "-encoding",
@@ -103,5 +102,6 @@ libraryDependencies ++= Seq(
   scalatest
 )
 
-
 enablePlugins(AutomateHeaderPlugin)
+enablePlugins(ScalafmtPlugin)
+scalafmtOnCompile := true
