@@ -4,8 +4,8 @@ val CacheUpdate  = true
 
 organization := Organization
 name := "json4s-java-time"
-scalaVersion := "2.11.11"
-crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.2")
+scalaVersion := "2.11.12"
+crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.4")
 organizationName := Organization
 organizationHomepage := Some(url("https://github.com/kardapoltsev"))
 parallelExecution in Test := true
@@ -62,6 +62,7 @@ pomExtra := {
 import de.heikoseeberger.sbtheader.HeaderPattern
 import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
 import de.heikoseeberger.sbtheader.HeaderKey.headers
+
 val ScalaHeader =
   """/*
     |  Copyright 2017 Alexey Kardapoltsev
@@ -84,9 +85,9 @@ headers := Map(
   "scala" -> (HeaderPattern.cStyleBlockComment, ScalaHeader)
 )
 
-val json4sCore   = "org.json4s"    %% "json4s-core"   % "3.5.2" % "provided"
-val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.3" % "test"
-val json4sNative = "org.json4s"    %% "json4s-native" % "3.5.2" % "test"
+val json4sCore   = "org.json4s"    %% "json4s-core"   % "3.5.3" % "provided"
+val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.4" % "test"
+val json4sNative = "org.json4s"    %% "json4s-native" % "3.5.3" % "test"
 
 scalacOptions in (Compile, doc) := Seq(
   "-encoding",
