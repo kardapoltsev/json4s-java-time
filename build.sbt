@@ -5,7 +5,7 @@ val CacheUpdate  = true
 organization := Organization
 name := "json4s-java-time"
 scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.4")
+crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.5")
 organizationName := Organization
 organizationHomepage := Some(url("https://github.com/kardapoltsev"))
 parallelExecution in Test := true
@@ -15,7 +15,7 @@ initialize ~= { _ =>
     sys.error("Java 8 is required for this project.")
 }
 updateOptions := updateOptions.value.withCachedResolution(CacheUpdate)
-incOptions := incOptions.value.withNameHashing(true)
+//incOptions := incOptions.value.withNameHashing(true)
 scalacOptions ++= Seq(
   "-encoding",
   "UTF-8",
@@ -24,8 +24,8 @@ scalacOptions ++= Seq(
   "-feature",
   "-Xlint"
 )
-scalacOptions <++= scalaVersion map { sv =>
-  if (sv.startsWith("2.10")) {
+scalacOptions ++= {
+  if (scalaVersion.value.startsWith("2.10")) {
     Seq.empty[String]
   } else {
     Seq(
@@ -38,55 +38,35 @@ scalacOptions <++= scalaVersion map { sv =>
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 releaseCrossBuild := true
 
-pomExtra := {
-  <url>https://github.com/kardapoltsev/json4s-java-time</url>
-    <licenses>
-      <license>
-        <name>Apache 2</name>
-        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      </license>
-    </licenses>
-    <scm>
-      <connection>scm:git:git@github.com:kardapoltsev/json4s-java-time.git</connection>
-      <url>github.com/kardapoltsev/json4s-java-time</url>
-    </scm>
-    <developers>
-      <developer>
-        <name>Alexey Kardapoltsev</name>
-        <url>https://github.com/kardapoltsev</url>
-        <email>alexey.kardapoltsev@gmail.com</email>
-      </developer>
-    </developers>
-}
-
-import de.heikoseeberger.sbtheader.HeaderPattern
-import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
-import de.heikoseeberger.sbtheader.HeaderKey.headers
-
-val ScalaHeader =
-  """/*
-    |  Copyright 2017 Alexey Kardapoltsev
-    |
-    |  Licensed under the Apache License, Version 2.0 (the "License");
-    |  you may not use this file except in compliance with the License.
-    |  You may obtain a copy of the License at
-    |
-    |      http://www.apache.org/licenses/LICENSE-2.0
-    |
-    |  Unless required by applicable law or agreed to in writing, software
-    |  distributed under the License is distributed on an "AS IS" BASIS,
-    |  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    |  See the License for the specific language governing permissions and
-    |  limitations under the License.
-    | */
-    |""".stripMargin
-
-headers := Map(
-  "scala" -> (HeaderPattern.cStyleBlockComment, ScalaHeader)
+//publish configuration
+publishMavenStyle := true
+publishTo := Some(
+  if (isSnapshot.value)
+    Opts.resolver.sonatypeSnapshots
+  else
+    Opts.resolver.sonatypeStaging
+)
+homepage := Some(url("https://github.com/kardapoltsev/astparser"))
+scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/kardapoltsev/astparser"),
+    "scm:git@github.com:kardapoltsev/astparser.git"
+  )
+)
+developers := List(
+  Developer(
+    id = "kardapoltsev",
+    name = "Alexey Kardapoltsev",
+    email = "alexey.kardapoltsev@gmail.com",
+    url = url("https://github.com/kardapoltsev"))
 )
 
+licenses := Seq(("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")))
+import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
+startYear := Some(2016)
+
 val json4sCore   = "org.json4s"    %% "json4s-core"   % "3.5.3" % "provided"
-val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.4" % "test"
+val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.5" % "test"
 val json4sNative = "org.json4s"    %% "json4s-native" % "3.5.3" % "test"
 
 scalacOptions in (Compile, doc) := Seq(
