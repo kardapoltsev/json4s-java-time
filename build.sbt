@@ -5,7 +5,7 @@ val CacheUpdate  = true
 organization := Organization
 name := "json4s-java-time"
 scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.6")
+crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.7")
 organizationName := Organization
 organizationHomepage := Some(url("https://github.com/kardapoltsev"))
 parallelExecution in Test := true
@@ -65,9 +65,10 @@ licenses := Seq(("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-
 import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
 startYear := Some(2016)
 
-val json4sCore   = "org.json4s"    %% "json4s-core"   % "3.5.4" % "provided"
-val scalatest    = "org.scalatest" %% "scalatest"     % "3.0.5" % "test"
-val json4sNative = "org.json4s"    %% "json4s-native" % "3.5.4" % "test"
+val Json4sVersion = "3.6.1"
+val json4sCore    = "org.json4s" %% "json4s-core" % Json4sVersion % "provided"
+val json4sNative  = "org.json4s" %% "json4s-native" % Json4sVersion % "test"
+val scalatest     = "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
 scalacOptions in (Compile, doc) := Seq(
   "-encoding",
