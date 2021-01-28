@@ -21,9 +21,10 @@ import java.time._
 
 import org.json4s.{DefaultFormats, MappingException}
 import org.json4s.native.Serialization
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.wordspec.{AnyWordSpec}
+import org.scalatest.matchers.should.Matchers
 
-class JavaTimeSerializersSpec extends WordSpec with Matchers {
+class JavaTimeSerializersSpec extends AnyWordSpec with Matchers {
   implicit val formats = DefaultFormats ++ JavaTimeSerializers.defaults
 
   private val sample = ZonedDateTime.of(

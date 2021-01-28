@@ -4,8 +4,8 @@ val CacheUpdate  = true
 
 organization := Organization
 name := "json4s-java-time"
-scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.10.6", scalaVersion.value, "2.12.7")
+scalaVersion := "2.13.4"
+crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.7", scalaVersion.value)
 organizationName := Organization
 organizationHomepage := Some(url("https://github.com/kardapoltsev"))
 parallelExecution in Test := true
@@ -25,7 +25,7 @@ scalacOptions ++= Seq(
   "-Xlint"
 )
 scalacOptions ++= {
-  if (scalaVersion.value.startsWith("2.10")) {
+  if (scalaVersion.value.startsWith("2.10") || scalaVersion.value.startsWith("2.13")) {
     Seq.empty[String]
   } else {
     Seq(
@@ -65,19 +65,11 @@ licenses := Seq(("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-
 import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
 startYear := Some(2016)
 
-val Json4sVersion = "3.6.1"
+val Json4sVersion = "3.6.10"
 val json4sCore    = "org.json4s" %% "json4s-core" % Json4sVersion % "provided"
 val json4sNative  = "org.json4s" %% "json4s-native" % Json4sVersion % "test"
-val scalatest     = "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+val scalatest     = "org.scalatest" %% "scalatest" % "3.2.3" % "test"
 
-scalacOptions in (Compile, doc) := Seq(
-  "-encoding",
-  "UTF-8",
-  "-Xlint",
-  "-deprecation",
-  "-unchecked",
-  "-Xfatal-warnings"
-)
 libraryDependencies ++= Seq(
   json4sCore,
   json4sNative,
